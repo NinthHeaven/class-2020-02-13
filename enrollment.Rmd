@@ -1,0 +1,45 @@
+---
+title: "Class-02-13-20"
+author: "Saul Soto"
+date: "2/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(gt)
+```
+
+```{r}
+x <- read_excel("class_enrollment_summary_by_term_2.13.20.xlsx",
+                skip = 3) %>%
+     clean_names() %>%
+     filter(course_department == "Government") %>%
+     arrange(desc(total)) %>%
+     slice(1:5) %>%
+     select(course_title, course_name, instructor_full_name,
+            total) %>%
+     gt() %>%
+      tab_header( title = "Top Five Government Classes",
+                  subtitle = "Source: Enrollment Data, Harvard")
+x
+```
+
+```{r}
+library(tidyverse)
+tibble(mtcars)
+
+#Reprex runs fresh new Rmarkdown. find it in tools >addins
+
+library(praise)
+template <- "${EXCLAMATION} - your reprex is ${adjective}!"
+praise(template)
+
+#Datapasta is also a good tool for running errors
+#ggrepel for text/annotation and gglabeler
+```
+
